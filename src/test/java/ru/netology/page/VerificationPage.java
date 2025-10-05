@@ -16,12 +16,12 @@ public class VerificationPage {
     }
 
     public void verifyErrorNotification(String expectedText) {
-        errorNotification.shouldNotHave(exactText(expectedText)).shouldBe(visible);
+        errorNotification.shouldHave(exactText(expectedText)).shouldBe(visible);
     }
 
-    public DashboardPage validVerify(String verificationCode) {
+    public void validVerify(String verificationCode) {
         verify(verificationCode);
-        return new DashboardPage();
+        new DashboardPage();
     }
 
     public void verify(String verificationCode) {
