@@ -35,6 +35,7 @@ public class BankLoginTest {
     @DisplayName("Should successfully login to dashboard with exist login and password from sut test data")
     void shouldSuccessfulLogin() {
         var verificationPage = loginPage.validLogin(authInfo);
+        verificationPage.verifyVerificationPage();
         var verificationCode = SQLHelper.getVerificationCode();
         verificationPage.validVerify(verificationCode.getCode());
     }
@@ -44,7 +45,7 @@ public class BankLoginTest {
     void shouldGetErrorNotificationIfLoginWithRandomUserWithoutAddingToBase() {
         var authInfo = DataHelper.generateRandomUser();
         loginPage.validLogin(authInfo);
-        loginPage.verifyErrorNotification("Ошибка! Неверно указан логин или пароль");
+        loginPage.verifyErrorNotification("Ошибка! \nНеверно указан логин или пароль");
     }
 
     @Test
@@ -53,7 +54,6 @@ public class BankLoginTest {
         var verificationPage = loginPage.validLogin(authInfo);
         var verificationCode = DataHelper.generateRandomVerificationCode();
         verificationPage.verify(verificationCode.getCode());
-        verificationPage.verifyErrorNotification("Ошибка! Неверно указан код! Попробуйте еще раз.");
-
+        verificationPage.verifyErrorNotification("Ошибка! \nНеверно указан код! Попробуйте ещё раз.");
     }
 }
