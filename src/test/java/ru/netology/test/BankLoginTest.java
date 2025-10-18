@@ -8,6 +8,7 @@ import ru.netology.data.DataHelper;
 import ru.netology.data.SQLHelper;
 import ru.netology.page.LoginPage;
 
+import static com.codeborne.selenide.Condition.exactText;
 import static ru.netology.data.SQLHelper.cleanAuthCodes;
 import static ru.netology.data.SQLHelper.cleanDatabase;
 import static com.codeborne.selenide.Selenide.open;
@@ -54,6 +55,6 @@ public class BankLoginTest {
         var verificationPage = loginPage.validLogin(authInfo);
         var verificationCode = DataHelper.generateRandomVerificationCode();
         verificationPage.verify(verificationCode.getCode());
-        verificationPage.verifyErrorNotification("Ошибка! " + "Неверно указан код! Попробуйте ещё раз.");
+        verificationPage.verifyErrorNotification("Ошибка\nОшибка! Неверно указан код! Попробуйте ещё раз.");
     }
 }
